@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
+import { ExpenseContext } from '../Store';
 
-export default function Analytics(props) {
+export default function Analytics() {
   let expensesByCategory = [];
-  let expenseData = [];
+
+  let { state } = useContext(ExpenseContext);
+  let expenseData = state;
+
   let categories = [...new Set(expenseData.map((item) => item.type))];
 
   if (expenseData !== 'undefined') {
