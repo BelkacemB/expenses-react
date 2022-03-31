@@ -15,9 +15,7 @@ const expenseReducer = (state, action) => {
 };
 
 export default function App() {
-  const [state, dispatch] = useReducer(expenseReducer, [
-    { type: 'food', amount: 60 },
-  ]);
+  const [state, dispatch] = useReducer(expenseReducer, []);
 
   return (
     <ExpenseContext.Provider value={{ state, dispatch }}>
