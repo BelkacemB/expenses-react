@@ -1,18 +1,14 @@
 import React from 'react';
 
-// Create a context
-let MyContext = React.createContext([]);
+export const ExpenseContext = React.createContext();
 
-// Create the global state
+const initialState = [];
 
-// create the reducer (should contain a switch and ADD_EXPENSE action)
-
-// Make the context a higher order compenent
-export default function Store(props) {
-  return (
-    <MyContext.Provider>
-      <p>(This page is wrapped in context)</p>
-      {props.children}
-    </MyContext.Provider>
-  );
+export function expenceReducer(state, action) {
+  console.log('Inside dispatcher');
+  switch (action.type) {
+    case 'ADD_EXPENSE':
+      console.log(action.payload);
+      return [...state, action.payload];
+  }
 }

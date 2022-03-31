@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Analytics({ expenseData }) {
+export default function Analytics(props) {
   let expensesByCategory = [];
-
+  let expenseData = [];
   let categories = [...new Set(expenseData.map((item) => item.type))];
 
-  for (let cat of categories) {
-    let sumCatExpenses = expenseData
-      .filter((e) => e.type === cat)
-      .reduce((a, b) => a + b.amount, 0);
+  if (expenseData !== 'undefined') {
+    for (let cat of categories) {
+      let sumCatExpenses = expenseData
+        .filter((e) => e.type === cat)
+        .reduce((a, b) => a + b.amount, 0);
 
-    expensesByCategory = [
-      ...expensesByCategory,
-      { category: cat, sum: sumCatExpenses },
-    ];
+      expensesByCategory = [
+        ...expensesByCategory,
+        { category: cat, sum: sumCatExpenses },
+      ];
+    }
   }
 
   return (

@@ -1,24 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import './style.css';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
 import Analytics from './components/Analytics';
-import Store from './Store';
+import { expenseReducer, ExpenseContext } from './Store';
 export default function App() {
-  const [expenses, setExpenses] = useState([]);
-
-  const handleAddExpense = (expense) => {
-    console.log('Adding expense to the list!');
-    setExpenses([...expenses, expense]);
-  };
+  const [state, dispatch] = useReducer(() => expenseReducer, []);
 
   return (
-    <Store>
+    <ExpenseContext.Provider value={{ state, dispatch }}>
       <div>
-        <ExpenseForm handleAddExpense={handleAddExpense} />
-        <ExpenseList expenseList={expenses} />
-        <Analytics expenseData={expenses} />
+        <ExpenseForm />
+        <ExpenseList />
+        <Analytics />
       </div>
-    </Store>
+    </ExpenseContext.Provider>
   );
 }

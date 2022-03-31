@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import Expense from '../model/Expense';
+import React, { useState, useContext } from 'react';
 
-export default function ExpenseForm({ handleAddExpense }) {
+import Expense from '../model/Expense';
+import { ExpenseContext } from '../Store';
+
+export default function ExpenseForm() {
+  const { dispatch } = React.useContext(ExpenseContext);
+  console.log('Dispatch from expense form:');
+  console.log(dispatch);
+
   const [currentExpense, setCurrentExpense] = useState(
     new Expense('housing', 50)
   );
@@ -39,7 +45,12 @@ export default function ExpenseForm({ handleAddExpense }) {
         <option value="entertainment">Entertainment</option>
         <option value="bills">Bills</option>
       </select>
-      <button type="submit" onClick={() => handleAddExpense(currentExpense)}>
+      <button
+        type="submit"
+        onClick={() =>
+          dispatch({ type: 'ADD_EXPENSE', payload: currentExpense })
+        }
+      >
         {' '}
         Save
       </button>

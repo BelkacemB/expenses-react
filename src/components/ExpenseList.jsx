@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ExpenseContext } from '../Store';
 
-export default function ExpenseList({ expenseList }) {
+export default function ExpenseList() {
+  const { state } = useContext(ExpenseContext);
+  console.log('State from event list :');
+  console.log(state);
+
+  let expenseList = state;
+
   return (
     <div>
-      {expenseList.length > 0 && (
+      {expenseList?.length > 0 && (
         <React.Fragment>
           <h1>Expenses list</h1>
           <ul>
