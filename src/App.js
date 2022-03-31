@@ -3,16 +3,7 @@ import './style.css';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
 import Analytics from './components/Analytics';
-import { ExpenseContext } from './Store';
-
-const expenseReducer = (state, action) => {
-  console.log('Inside dispatcher');
-  switch (action.type) {
-    case 'ADD_EXPENSE':
-      console.log(action.payload);
-      return [...state, action.payload];
-  }
-};
+import { ExpenseContext, expenseReducer } from './Store';
 
 export default function App() {
   const [state, dispatch] = useReducer(expenseReducer, []);
